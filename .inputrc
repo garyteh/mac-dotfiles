@@ -1,0 +1,32 @@
+$include /etc/inputrc
+
+set bell-style none
+set echo-control-characters off
+set colored-stats on
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set match-hidden-files off
+set completion-query-items 100
+set visible-stats on
+set input-meta on
+set output-meta on
+set convert-meta off
+
+# set editing-mode vi
+
+# $if Bash
+#   # F10 toggles mc on and off
+#   # Note Ctrl-o toggles panes on and off in mc
+#   "\e[21~": "mc\C-M"
+# 
+#   # do history expansion when space entered
+#   Space: magic-space
+# 
+#   # By defult Ctrl-{left,right} jump over words,
+#   # instead jump as shell tokenizes the line
+#   "\e[1;5C": shell-forward-word
+#   "\e[1;5D": shell-backward-word
+# $endif
+
+"\e[B": history-search-forward
+"\e[A": history-search-backward

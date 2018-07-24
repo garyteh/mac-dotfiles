@@ -1,0 +1,42 @@
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[user]
+  name = Gary Teh
+  email = changsiongteh@gmail.com
+
+[alias]
+  co = checkout
+  ci = commit
+  st = status
+  sb = show-branch
+  up = !git fetch origin && git rebase origin/master
+  lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %f %Cgreen(%cr)%Creset'
+  who = log --format="'%ai %h %aN %s'"
+  ba = branch -a
+  rpo = remote prune origin
+
+[apply]
+  whitespace = nowarn
+
+[color]
+  ui = auto
+
+[branch]
+  autosetuprebase = always
+  autosetupmerge = true
+
+[showbranch]
+  default = --all
+
+[push]
+  default = current
+
+[log]
+  decorate = true
+
+[core]
+  excludesfile = ~/.gitignore_global
