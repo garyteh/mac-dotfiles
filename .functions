@@ -2,16 +2,14 @@
 
 function p() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && echo '__P_PROJECT_PATH not found.' && return 1
-    [[ $# -ne 1 ]] && cat << EOF && return 2
+    [[ $# -ne 1 ]] && cat << EOF && return 1
 Usage: p [directory-name]
 Navigate to your project quickly. 
 EOF
     local path paths numberOfProjects searchTerm
     searchTerm="$1"
-
     paths=$(find $__P_PROJECT_PATH -maxdepth ${__P_MAX_DEPTH:-1} -type d -name $searchTerm)
     numberOfProjects=$(wc -l <<< "$paths")
-
     if [[ $numberOfProjects -eq 1 ]]; then
         path=$(sed '1q;d' <<< "$paths")
         [[ -d "$path" ]] && cd "$path" && pwd && return 0
@@ -25,19 +23,15 @@ EOF
             fi
         done
     fi
-    
     echo "Project not found: $searchTerm"
     return 1
 }
 
 function _p() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && return 1
-
     local curr potentials 
-    
     curr="${COMP_WORDS[COMP_CWORD]}"
     potentials=$(find $__P_PROJECT_PATH -maxdepth ${__P_MAX_DEPTH:-1} -type d | grep -o -E "[^/]*$")
-
     COMPREPLY=( $(compgen -W "${potentials}" -- ${curr}) )
 }
 complete -F _p p
