@@ -32,7 +32,7 @@ EOF
 
 function _p() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && return 1
-    
+
     local curr potentials 
     
     curr="${COMP_WORDS[COMP_CWORD]}"
@@ -41,3 +41,39 @@ function _p() {
     COMPREPLY=( $(compgen -W "${potentials}" -- ${curr}) )
 }
 complete -F _p p
+
+function f() {
+    [[ $# -ne 1 ]] && cat << EOF && return 1
+Usage: f [search-term]
+Find file name from current folder.
+EOF
+    local tmpFolder="/tmp/_f_findings"
+    find . -iname "*$1*" | tee $tmpFolder | nl
+}
+
+function f#() {
+    local tmpFolder="/tmp/_f_findings"
+    ([[ $# -ne 1 ]] || [[ ! -r $tmpFolder ]]) && cat << EOF && return 1
+Usage: f# [0..n]
+Show file path from `f` results. You have to use `f` first.
+EOF
+    sed "${1}q;d" $tmpFolder
+}
+
+function fvim() {
+    local tmpFolder="/tmp/_f_findings"
+    ([[ $# -ne 1 ]] || [[ ! -r $tmpFolder ]]) && cat << EOF && return 1
+Usage: fvim [index]
+Open the file from `f` results in vim. You have to use `f` first.
+EOF
+    vim $(sed "${1}q;d" $tmpFolder)
+}
+
+function fcode() {
+    local tmpFolder="/tmp/_f_findings"
+    ([[ $# -ne 1 ]] || [[ ! -r $tmpFolder ]]) && cat << EOF && return 1
+Usage: fvim [index]
+Open the file from `f` results in Visual Studio Code. You have to use `f` first.
+EOF
+    code $(sed "${1}q;d" $tmpFolder)
+}
