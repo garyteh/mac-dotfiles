@@ -14,7 +14,8 @@
   st = status
   sb = show-branch
   up = !git fetch origin && git rebase origin/master
-  lg = log --graph --pretty=format:'%Cred%h%Creset-%C(yellow)%d%Creset %f %Cgreen(%cr)%Creset'
+  l = "!git --no-pager lg -10; echo"
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
   who = log --format="'%ai %h %aN %s'"
   ba = branch -a
   rpo = remote prune origin
