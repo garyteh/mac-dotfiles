@@ -79,3 +79,16 @@ function idea() {
     [[ ! -e "$idea_path" ]] && (>&2 echo "IntelliJ IDEA is not installed.") && exit 1
     open -a "$idea_path" .
 }
+
+function _git_clean_remote_branch() {
+    local dry_run_results read_yes_no
+    dry_run_results=$(git remote prune origin --dry-run)
+    if [[ $dry_run_results ]]; then
+        printf "$dry_run_results\n"
+        read -r -p "Are you sure? [y/N] " read_yes_no
+        read_yes_no=${read_yes_no,,}
+        if [[ "$read_yes_no" =~ ^(yes|y)$ ]]; then
+            git remote prune origin
+        fi
+    fi
+}
