@@ -12,14 +12,16 @@ EOF
     numberOfProjects=$(wc -l <<< "$paths")
     if [[ $numberOfProjects -eq 1 ]]; then
         path=$(sed '1q;d' <<< "$paths")
-        [[ -d "$path" ]] && cd "$path" && pwd && return 0
+        [[ -d "$path" ]] && cd "$path" && pwd && [[ ! -z ${__P_POST_CMD+x} ]] && eval ${__P_POST_CMD}
+        return 0
     elif [[ $numberOfProjects -gt 1 ]]; then
         nl <<< "$paths"
         while true; do
             read -p "Select project (1-$numberOfProjects): " index
             if [[ $index =~ ^[0-9]+$ ]]; then
                 path=$(sed "${index}q;d" <<< "$paths")
-                [[ -d "$path" ]] && cd "$path" && pwd && return 0
+                [[ -d "$path" ]] && cd "$path" && pwd && [[ ! -z ${__P_POST_CMD+x} ]] && eval ${__P_POST_CMD}
+                return 0
             fi
         done
     fi
