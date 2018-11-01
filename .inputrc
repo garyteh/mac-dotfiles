@@ -21,9 +21,8 @@ set convert-meta off
 #   # do history expansion when space entered
 #   Space: magic-space
 # $endif
-
-"\e[1;3D": shell-backward-word
-"\e[1;3C": shell-forward-word
+# "\e[1;3D": shell-backward-word
+# "\e[1;3C": shell-forward-word
 
 "\e[B": history-search-forward
 "\e[A": history-search-backward
