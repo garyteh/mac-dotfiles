@@ -1,6 +1,7 @@
-[[ -s `brew --prefix`/etc/bash_completion.d/git-completion.bash ]] && source `brew --prefix`/etc/bash_completion.d/git-completion.bash
+[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
+[[ -s $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]] && source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-[[ -s `brew --prefix`/etc/bash_completion.d/git-prompt.sh ]] && source `brew --prefix`/etc/bash_completion.d/git-prompt.sh
+[[ -s $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]] && source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
 [[ -s "/usr/local/opt/nvm/nvm.sh" ]] && source "/usr/local/opt/nvm/nvm.sh"
 
 eval "$(jenv init -)"
