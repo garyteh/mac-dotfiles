@@ -19,6 +19,8 @@
   who = log --format="'%ai %h %aN %s'"
   ba = branch -a
   rpo = remote prune origin
+  lbc = !_git_local_branch_cleanup
+  hk = "!git rpo && git lbc"
 
 [apply]
   whitespace = nowarn
