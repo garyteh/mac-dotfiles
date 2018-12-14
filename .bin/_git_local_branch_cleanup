@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+! git config --get remote.origin.url &> /dev/null && echo 'This is not a git repository.' && exit 1
+
+containsElement () {
+    local e match="$1"
+    shift
+    for e
+    do 
+        [[ "$e" =~ remotes\/.*\/$match$ ]] && return 0
+    done
+    return 1
+}
+
+remote_branches=( $(git branch --all | cut -c3- | grep '^remotes/') )
+local_branches=( $(git branch --all | cut -c3- | grep -v '^remotes/') )
+stale_branches=()
+
+for local_branch in ${local_branches[@]}
+do
+    if [[ ${local_branch} != "master" ]] && [[ ${local_branch} != "develop" ]] && ! containsElement ${local_branch} ${remote_branches[@]}; then
+        git branch -D ${local_branch}
+    fi
+done
