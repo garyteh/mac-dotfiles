@@ -18,6 +18,7 @@ remote_branches=( $(git branch --all | cut -c3- | grep '^remotes/') )
 local_branches=( $(git branch --all | cut -c3- | grep -v '^remotes/') )
 stale_branches=()
 
+git checkout develop &> /dev/null || git checkout master &> /dev/null || (>&2 echo "warn: Neither develop nor master branch is found. Proceeding...") 
 for local_branch in ${local_branches[@]}
 do
     if [[ ${local_branch} != "master" ]] && [[ ${local_branch} != "develop" ]] && ! containsElement ${local_branch} ${remote_branches[@]}; then
