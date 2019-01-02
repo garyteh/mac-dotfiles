@@ -102,3 +102,8 @@ npm() {
     npm "$@"
 }
 
+rbenv() {
+    unset -f rbenv
+    eval "$(rbenv init -)"
+    rbenv "$@"
+}
