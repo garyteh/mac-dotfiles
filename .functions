@@ -107,3 +107,9 @@ rbenv() {
     eval "$(rbenv init -)"
     rbenv "$@"
 }
+
+jenv() {
+    unset -f jenv
+    eval "$(jenv init -)"
+    jenv "$@"
+}
