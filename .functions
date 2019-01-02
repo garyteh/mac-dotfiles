@@ -80,35 +80,32 @@ function idea() {
     open -a "$idea_path" .
 }
 
-nvm() {
+function nvm() {
     unset -f nvm
-    export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
     nvm "$@"
 }
 
-node() {
+function node() {
     unset -f node
-    export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
     node "$@"
 }
 
-npm() {
+function npm() {
     unset -f npm
-    export NVM_DIR=~/.nvm
     source $(brew --prefix nvm)/nvm.sh
     source <(npm completion)
     npm "$@"
 }
 
-rbenv() {
+function rbenv() {
     unset -f rbenv
     eval "$(rbenv init -)"
     rbenv "$@"
 }
 
-jenv() {
+function jenv() {
     unset -f jenv
     eval "$(jenv init -)"
     jenv "$@"
