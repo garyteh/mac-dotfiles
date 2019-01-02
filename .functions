@@ -79,3 +79,26 @@ function idea() {
     [[ ! -e "$idea_path" ]] && (>&2 echo "IntelliJ IDEA is not installed.") && exit 1
     open -a "$idea_path" .
 }
+
+nvm() {
+    unset -f nvm
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+    nvm "$@"
+}
+
+node() {
+    unset -f node
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+    node "$@"
+}
+
+npm() {
+    unset -f npm
+    export NVM_DIR=~/.nvm
+    source $(brew --prefix nvm)/nvm.sh
+    source <(npm completion)
+    npm "$@"
+}
+
