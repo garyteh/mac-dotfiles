@@ -4,6 +4,7 @@ function p() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && echo '__P_PROJECT_PATH not found.' && return 1
     [[ $# -ne 1 ]] && cat << EOF && return 1
 Usage: p [directory-name]
+
 Navigate to your project quickly. 
 EOF
     local path paths numberOfProjects searchTerm
@@ -41,6 +42,7 @@ complete -F _p p
 function f() {
     [[ $# -ne 1 ]] && cat << EOF && return 1
 Usage: f [search-term]
+
 Find file name from current folder.
 EOF
     local tmpFolder="/tmp/_f_findings"
@@ -51,6 +53,7 @@ function f#() {
     local tmpFolder="/tmp/_f_findings"
     ([[ $# -ne 1 ]] || [[ ! -r $tmpFolder ]]) && cat << EOF && return 1
 Usage: f# [0..n]
+
 Show file path from `f` results. You have to use `f` first.
 EOF
     sed "${1}q;d" $tmpFolder
@@ -60,6 +63,7 @@ function fvim() {
     local tmpFolder="/tmp/_f_findings"
     ([[ $# -ne 1 ]] || [[ ! -r $tmpFolder ]]) && cat << EOF && return 1
 Usage: fvim [index]
+
 Open the file from `f` results in vim. You have to use `f` first.
 EOF
     vim $(sed "${1}q;d" $tmpFolder)
@@ -69,6 +73,7 @@ function fcode() {
     local tmpFolder="/tmp/_f_findings"
     ([[ $# -ne 1 ]] || [[ ! -r $tmpFolder ]]) && cat << EOF && return 1
 Usage: fvim [index]
+
 Open the file from `f` results in Visual Studio Code. You have to use `f` first.
 EOF
     code $(sed "${1}q;d" $tmpFolder)
@@ -79,6 +84,7 @@ function idea() {
     [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
     [[ "$1" == "-h" ]] && cat << EOF && return 1
 Usage: idea path[:number]
+
 Open an arbitrary file, folder, or project for editing in IntelliJ IDEA.
 For more information, please visit https://www.jetbrains.com/help/idea/opening-files-from-command-line.html.
 EOF
@@ -90,6 +96,7 @@ function idea-diff() {
     [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
     [[ $# -ne 2 ]] && cat << EOF && return 1
 Usage: idea-diff path1 path2
+
 Viewing differences between files in IntelliJ IDEA.
 For more information, please visit https://www.jetbrains.com/help/idea/command-line-differences-viewer.html.
 EOF
@@ -101,6 +108,7 @@ function idea-merge() {
     [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
     ([[ $# -ne 3 ]] || [[ $# -ne 4 ]]) && cat << EOF && return 1
 Usage: idea-merge path1 path2 [path3] output
+
 Merge files in IntelliJ IDEA.
 For more information, please visit https://www.jetbrains.com/help/idea/command-line-merge-tool.html.
 EOF
