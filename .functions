@@ -75,9 +75,36 @@ EOF
 }
 
 function idea() {
-    local idea_path="/Applications/IntelliJ IDEA.app"
-    [[ ! -e "$idea_path" ]] && (>&2 echo "IntelliJ IDEA is not installed.") && return 1
-    open -a "$idea_path" .
+    local idea_bin_path="/usr/local/bin/idea"
+    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
+    [[ "$1" == "-h" ]] && cat << EOF && return 1
+Usage: idea path[:number]
+Open an arbitrary file, folder, or project for editing in IntelliJ IDEA.
+For more information, please visit https://www.jetbrains.com/help/idea/opening-files-from-command-line.html.
+EOF
+    [[ $# -lt 1 ]] && $idea_bin_path . || $idea_bin_path "$@"
+}
+
+function idea-diff() {
+    local idea_bin_path="/usr/local/bin/idea"
+    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
+    [[ $# -ne 2 ]] && cat << EOF && return 1
+Usage: idea-diff path1 path2
+Viewing differences between files in IntelliJ IDEA.
+For more information, please visit https://www.jetbrains.com/help/idea/command-line-differences-viewer.html.
+EOF
+    $idea_bin_path diff "$@"
+}
+
+function idea-merge() {
+    local idea_bin_path="/usr/local/bin/idea"
+    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
+    ([[ $# -ne 3 ]] || [[ $# -ne 4 ]]) && cat << EOF && return 1
+Usage: idea-merge path1 path2 [path3] output
+Merge files in IntelliJ IDEA.
+For more information, please visit https://www.jetbrains.com/help/idea/command-line-merge-tool.html.
+EOF
+    $idea_bin_path merge "$@"
 }
 
 function nvm() {
