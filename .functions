@@ -173,40 +173,40 @@ EOF1
 }
 __generate_jetbrains_cli
 
-function webstorm() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
+function idea() {
+    local idea_bin_path="/usr/local/bin/idea"
+    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
     [[ "$1" == "-h" ]] && cat << EOF && return 1
-Usage: webstorm path[:number]
+Usage: idea path[:number]
 
-Open an arbitrary file, folder, or project for editing in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
+Open an arbitrary file, folder, or project for editing in IntelliJ IDEA.
+For more information, please visit https://www.jetbrains.com/help/idea/opening-files-from-command-line.html.
 EOF
-    [[ $# -lt 1 ]] && $webstorm_bin_path . || $webstorm_bin_path "$@"
+    [[ $# -lt 1 ]] && $idea_bin_path . || $idea_bin_path "$@"
 }
 
-function webstorm-diff() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
+function idea-diff() {
+    local idea_bin_path="/usr/local/bin/idea"
+    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
     [[ $# -ne 2 ]] && cat << EOF && return 1
-Usage: webstorm-diff path1 path2
+Usage: idea-diff path1 path2
 
-Viewing differences between files in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
+Viewing differences between files in IntelliJ IDEA.
+For more information, please visit https://www.jetbrains.com/help/idea/command-line-differences-viewer.html.
 EOF
-    $webstorm_bin_path diff "$@"
+    $idea_bin_path diff "$@"
 }
 
-function webstorm-merge() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
-    [[ $# -ne 3 ]] && [[ $# -ne 4 ]] && cat << EOF && return 1
-Usage: webstorm-merge path1 path2 [path3] output
+function idea-merge() {
+    local idea_bin_path="/usr/local/bin/idea"
+    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
+    ([[ $# -ne 3 ]] || [[ $# -ne 4 ]]) && cat << EOF && return 1
+Usage: idea-merge path1 path2 [path3] output
 
-Merge files in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
+Merge files in IntelliJ IDEA.
+For more information, please visit https://www.jetbrains.com/help/idea/command-line-merge-tool.html.
 EOF
-    $webstorm_bin_path merge "$@"
+    $idea_bin_path merge "$@"
 }
 
 function nvm() {
