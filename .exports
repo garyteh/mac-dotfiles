@@ -1,7 +1,7 @@
-export SDKMAN_DIR="$HOME/.sdkman"
-export NVM_DIR="$HOME/.nvm"
+export SDKMAN_DIR="~/.sdkman"
+export NVM_DIR="~/.nvm"
 export EDITOR='vim'
 export HISTSIZE='32768';
 export HISTFILESIZE="${HISTSIZE}";
 export HISTCONTROL='ignoreboth';
-export __P_PROJECT_PATH="$HOME/Documents/workspace"
+export __P_PROJECT_PATH="~/Documents/workspace"
