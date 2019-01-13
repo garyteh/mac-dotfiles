@@ -1,4 +1,4 @@
-[[ -e "~/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
+[[ -e "$HOME/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
 
 function p() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && echo '__P_PROJECT_PATH not found.' && return 1
