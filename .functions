@@ -174,15 +174,22 @@ EOF1
 __generate_jetbrains_cli
 
 function nvm() {
-    (>&2 echo "Operation not supported.") && return 1
+    unset -f nvm
+    source $(brew --prefix nvm)/nvm.sh
+    nvm "$@"
 }
 
 function node() {
-    (>&2 echo "Operation not supported.") && return 1
+    unset -f node
+    source $(brew --prefix nvm)/nvm.sh
+    node "$@"
 }
 
 function npm() {
-    (>&2 echo "Operation not supported.") && return 1
+    unset -f npm
+    source $(brew --prefix nvm)/nvm.sh
+    source <(npm completion)
+    npm "$@"
 }
 
 function rbenv() {
@@ -203,4 +210,19 @@ function top-cpu() {
 
 function top-memory() {
     (>&2 echo "Operation not supported.") && return 1
+}
+
+function decode-base64() {
+    local hash_value value
+    if [[ $# -eq 1 ]]; then
+        hash_value=$1
+    else
+        read -sp 'Base64 hash (mute): ' hash_value
+        echo
+    fi
+    value=$(base64 -d <<< $hash_value)
+    if [[ $? -eq 0 ]]; then
+        echo $value | pbcopy
+        echo "Decoded value [$(pbpaste)] copied to the clipboard."
+    fi
 }
