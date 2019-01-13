@@ -115,25 +115,6 @@ EOF
     $idea_bin_path merge "$@"
 }
 
-function nvm() {
-    unset -f nvm
-    source $(brew --prefix nvm)/nvm.sh
-    nvm "$@"
-}
-
-function node() {
-    unset -f node
-    source $(brew --prefix nvm)/nvm.sh
-    node "$@"
-}
-
-function npm() {
-    unset -f npm
-    source $(brew --prefix nvm)/nvm.sh
-    source <(npm completion)
-    npm "$@"
-}
-
 function rbenv() {
     unset -f rbenv
     eval "$(rbenv init -)"
@@ -144,19 +125,4 @@ function jenv() {
     unset -f jenv
     eval "$(jenv init -)"
     jenv "$@"
-}
-
-function decode-base64() {
-    local hash_value value
-    if [[ $# -eq 1 ]]; then
-        hash_value=$1
-    else
-        read -sp 'Base64 hash (mute): ' hash_value
-        echo
-    fi
-    value=$(base64 -d <<< $hash_value)
-    if [[ $? -eq 0 ]]; then
-        echo $value | pbcopy
-        echo "Decoded value [$(pbpaste)] copied to the clipboard."
-    fi
 }

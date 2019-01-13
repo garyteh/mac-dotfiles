@@ -1,6 +1,2 @@
-[[ -f $(brew --prefix)/etc/bash_completion ]] && source $(brew --prefix)/etc/bash_completion
-[[ -s $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]] && source $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 [[ -s "~/.sdkman/bin/sdkman-init.sh" ]] && source "~/.sdkman/bin/sdkman-init.sh"
-[[ -s $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]] && source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
 
-eval "$(perl -I~/perl5/lib/perl5 -Mlocal::lib=~/perl5)"
