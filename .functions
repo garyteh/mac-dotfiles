@@ -200,7 +200,7 @@ EOF
 function idea-merge() {
     local idea_bin_path="/usr/local/bin/idea"
     [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
-    ([[ $# -ne 3 ]] || [[ $# -ne 4 ]]) && cat << EOF && return 1
+    [[ $# -ne 3 ]] && [[ $# -ne 4 ]] && cat << EOF && return 1
 Usage: idea-merge path1 path2 [path3] output
 
 Merge files in IntelliJ IDEA.
