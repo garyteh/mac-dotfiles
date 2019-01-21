@@ -173,78 +173,6 @@ EOF1
 }
 __generate_jetbrains_cli
 
-function idea() {
-    local idea_bin_path="/usr/local/bin/idea"
-    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
-    [[ "$1" == "-h" ]] && cat << EOF && return 1
-Usage: idea path[:number]
-
-Open an arbitrary file, folder, or project for editing in IntelliJ IDEA.
-For more information, please visit https://www.jetbrains.com/help/idea/opening-files-from-command-line.html.
-EOF
-    [[ $# -lt 1 ]] && $idea_bin_path . || $idea_bin_path "$@"
-}
-
-function idea-diff() {
-    local idea_bin_path="/usr/local/bin/idea"
-    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
-    [[ $# -ne 2 ]] && cat << EOF && return 1
-Usage: idea-diff path1 path2
-
-Viewing differences between files in IntelliJ IDEA.
-For more information, please visit https://www.jetbrains.com/help/idea/command-line-differences-viewer.html.
-EOF
-    $idea_bin_path diff "$@"
-}
-
-function idea-merge() {
-    local idea_bin_path="/usr/local/bin/idea"
-    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
-    [[ $# -ne 3 ]] && [[ $# -ne 4 ]] && cat << EOF && return 1
-Usage: idea-merge path1 path2 [path3] output
-
-Merge files in IntelliJ IDEA.
-For more information, please visit https://www.jetbrains.com/help/idea/command-line-merge-tool.html.
-EOF
-    $idea_bin_path merge "$@"
-}
-
-function webstorm() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
-    [[ "$1" == "-h" ]] && cat << EOF && return 1
-Usage: webstorm path[:number]
-
-Open an arbitrary file, folder, or project for editing in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
-EOF
-    [[ $# -lt 1 ]] && $webstorm_bin_path . || $webstorm_bin_path "$@"
-}
-
-function webstorm-diff() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
-    [[ $# -ne 2 ]] && cat << EOF && return 1
-Usage: webstorm-diff path1 path2
-
-Viewing differences between files in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
-EOF
-    $webstorm_bin_path diff "$@"
-}
-
-function webstorm-merge() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
-    [[ $# -ne 3 ]] && [[ $# -ne 4 ]] && cat << EOF && return 1
-Usage: webstorm-merge path1 path2 [path3] output
-
-Merge files in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
-EOF
-    $webstorm_bin_path merge "$@"
-}
-
 function nvm() {
     unset -f nvm
     source $(brew --prefix nvm)/nvm.sh
@@ -276,21 +204,6 @@ function jenv() {
     jenv "$@"
 }
 
-function decode-base64() {
-    local hash_value value
-    if [[ $# -eq 1 ]]; then
-        hash_value=$1
-    else
-        read -sp 'Base64 hash (mute): ' hash_value
-        echo
-    fi
-    value=$(base64 -d <<< $hash_value)
-    if [[ $? -eq 0 ]]; then
-        echo $value | pbcopy
-        echo "Decoded value [$(pbpaste)] copied to the clipboard."
-    fi
-}
-
 function top-cpu() {
     [[ "$1" == "-h" ]] && cat << EOF && return 1
 Usage: top-cpu [-h] [-t threshold]
@@ -309,4 +222,19 @@ Show processes that consumed memory that cross the threshold. By default the thr
 EOF
     [[ $# -lt 1 ]] && threshold=20 || threshold="$1"
     ps axmo pid=,pmem=,comm= | awk '$2 > '${threshold}' {print ;}'
+}
+
+function decode-base64() {
+    local hash_value value
+    if [[ $# -eq 1 ]]; then
+        hash_value=$1
+    else
+        read -sp 'Base64 hash (mute): ' hash_value
+        echo
+    fi
+    value=$(base64 -d <<< $hash_value)
+    if [[ $? -eq 0 ]]; then
+        echo $value | pbcopy
+        echo "Decoded value [$(pbpaste)] copied to the clipboard."
+    fi
 }
