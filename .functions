@@ -209,6 +209,18 @@ EOF
     $idea_bin_path merge "$@"
 }
 
+function webstorm() {
+    (>&2 echo "Operation not supported.") && return 1
+}
+
+function webstorm-diff() {
+    (>&2 echo "Operation not supported.") && return 1
+}
+
+function webstorm-merge() {
+    (>&2 echo "Operation not supported.") && return 1
+}
+
 function nvm() {
     unset -f nvm
     source $(brew --prefix nvm)/nvm.sh
