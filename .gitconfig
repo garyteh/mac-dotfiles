@@ -22,6 +22,7 @@
   lbc = !_git_local_branch_cleanup
   fc = clean -fd
   hk = "!git rpo && git lbc && git clean -df"
+  bpr = browse -- pulls
 
 [apply]
   whitespace = nowarn
