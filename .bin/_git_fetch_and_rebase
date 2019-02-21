@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+! git config --get remote.origin.url &> /dev/null && echo 'This is not a git repository.' && exit 1
+
+if [[ -z ${1+x} ]] && [[ -z ${2+x} ]]; then
+    git fetch origin
+    git rebase origin/master
+elif [[ -z ${1+x} ]]; then
+    git fetch $1
+    git rebase $1/master
+else
+    git fetch $1
+    git rebase $1/$2
+fi
