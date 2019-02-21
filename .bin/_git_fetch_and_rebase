@@ -7,7 +7,7 @@ set -euo pipefail
 if [[ -z ${1+x} ]] && [[ -z ${2+x} ]]; then
     git fetch origin
     git rebase origin/master
-elif [[ -z ${1+x} ]]; then
+elif [[ -z ${2+x} ]]; then
     git fetch $1
     git rebase $1/master
 else
