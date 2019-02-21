@@ -6,11 +6,11 @@ set -euo pipefail
 
 if [[ -z ${1+x} ]] && [[ -z ${2+x} ]]; then
     git fetch origin
-    git rebase origin/master
+    git merge origin/master
 elif [[ -z ${2+x} ]]; then
     git fetch $1
-    git rebase $1/master
+    git merge $1/master
 else
     git fetch $1
-    git rebase $1/$2
+    git merge $1/$2
 fi
