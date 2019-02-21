@@ -1,3 +1,7 @@
+### Custom format ###
+
+# jEnv
+.java-version
 
 # Created by https://www.gitignore.io/api/vim,osx,java,perl,ruby,node,bower,xcode,maven,python,gradle,grails,vagrant,archives,intellij,jetbrains,virtualenv,objective-c,sublimetext,visualstudio,jetbrains+all,jetbrains+iml,xcodeinjection,visualstudiocode,openframeworks+visualstudio
 # Edit at https://www.gitignore.io/?templates=vim,osx,java,perl,ruby,node,bower,xcode,maven,python,gradle,grails,vagrant,archives,intellij,jetbrains,virtualenv,objective-c,sublimetext,visualstudio,jetbrains+all,jetbrains+iml,xcodeinjection,visualstudiocode,openframeworks+visualstudio
