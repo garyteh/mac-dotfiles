@@ -23,6 +23,7 @@
   fc = clean -fd
   hk = "!git rpo && git lbc && git clean -df"
   bpr = browse -- pulls
+  spurs = !_git_stash_and_pull
 
 [apply]
   whitespace = nowarn
