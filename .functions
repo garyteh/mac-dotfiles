@@ -150,3 +150,11 @@ function jenv() {
     eval "$(jenv init -)"
     jenv "$@"
 }
+
+function top-cpu() {
+    (>&2 echo "Operation not supported.") && return 1
+}
+
+function top-memory() {
+    (>&2 echo "Operation not supported.") && return 1
+}
