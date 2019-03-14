@@ -173,42 +173,6 @@ EOF1
 }
 __generate_jetbrains_cli
 
-function webstorm() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
-    [[ "$1" == "-h" ]] && cat << EOF && return 1
-Usage: webstorm path[:number]
-
-Open an arbitrary file, folder, or project for editing in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
-EOF
-    [[ $# -lt 1 ]] && $webstorm_bin_path . || $webstorm_bin_path "$@"
-}
-
-function webstorm-diff() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
-    [[ $# -ne 2 ]] && cat << EOF && return 1
-Usage: webstorm-diff path1 path2
-
-Viewing differences between files in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
-EOF
-    $webstorm_bin_path diff "$@"
-}
-
-function webstorm-merge() {
-    local webstorm_bin_path="/usr/local/bin/webstorm"
-    [[ ! -e "$webstorm_bin_path" ]] && (>&2 echo "webstorm CLI is not found in [$webstorm_bin_path].") && return 1
-    [[ $# -ne 3 ]] && [[ $# -ne 4 ]] && cat << EOF && return 1
-Usage: webstorm-merge path1 path2 [path3] output
-
-Merge files in WebStorm.
-For more information, please visit https://www.jetbrains.com/help/webstorm/working-with-the-ide-features-from-command-line.html.
-EOF
-    $webstorm_bin_path merge "$@"
-}
-
 function nvm() {
     unset -f nvm
     source $(brew --prefix nvm)/nvm.sh
