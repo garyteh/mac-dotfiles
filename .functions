@@ -204,6 +204,21 @@ function jenv() {
     jenv "$@"
 }
 
+function decode-base64() {
+    local hash_value value
+    if [[ $# -eq 1 ]]; then
+        hash_value=$1
+    else
+        read -sp 'Base64 hash (mute): ' hash_value
+        echo
+    fi
+    value=$(base64 -d <<< $hash_value)
+    if [[ $? -eq 0 ]]; then
+        echo $value | pbcopy
+        echo "Decoded value [$(pbpaste)] copied to the clipboard."
+    fi
+}
+
 function top-cpu() {
     [[ "$1" == "-h" ]] && cat << EOF && return 1
 Usage: top-cpu [-h] [-t threshold]
@@ -222,19 +237,4 @@ Show processes that consumed memory that cross the threshold. By default the thr
 EOF
     [[ $# -lt 1 ]] && threshold=20 || threshold="$1"
     ps axmo pid=,pmem=,comm= | awk '$2 > '${threshold}' {print ;}'
-}
-
-function decode-base64() {
-    local hash_value value
-    if [[ $# -eq 1 ]]; then
-        hash_value=$1
-    else
-        read -sp 'Base64 hash (mute): ' hash_value
-        echo
-    fi
-    value=$(base64 -d <<< $hash_value)
-    if [[ $? -eq 0 ]]; then
-        echo $value | pbcopy
-        echo "Decoded value [$(pbpaste)] copied to the clipboard."
-    fi
 }
