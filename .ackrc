@@ -1,0 +1,4 @@
+--smart-case
+--follow
+--ignore-dir=.idea
+--ignore-dir=node_modules
