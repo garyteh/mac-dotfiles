@@ -5,3 +5,5 @@ export HISTSIZE='32768';
 export HISTFILESIZE="${HISTSIZE}";
 export HISTCONTROL='ignoreboth';
 export __P_PROJECT_PATH="$HOME/Documents/workspace"
+export __P_MAX_DEPTH=1
+export __P_POST_CMD="(git config --get remote.origin.url && (git pull --all -q || git fetch --all -q)) &> /dev/null &"
