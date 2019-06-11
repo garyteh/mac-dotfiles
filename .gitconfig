@@ -46,3 +46,6 @@
 
 [core]
   excludesfile = ~/.gitignore_global
+
+[tag]
+  sort = version:refname
