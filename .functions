@@ -82,53 +82,52 @@ EOF
     code $(sed "${1}q;d" $tmpFolder)
 }
 
-function idea() {
-    local idea_bin_path="/usr/local/bin/idea"
-    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
-    [[ "$1" == "-h" ]] && cat << EOF && return 1
-Usage: idea path[:number]
+function __generate_jetbrains_cli() {
+    local product
 
-Open an arbitrary file, folder, or project for editing in IntelliJ IDEA.
-For more information, please visit https://www.jetbrains.com/help/idea/opening-files-from-command-line.html.
-EOF
-    [[ $# -lt 1 ]] && $idea_bin_path . || $idea_bin_path "$@"
+    for product in {idea,webstorm,charm}; do
+        eval "$(cat<<EOF1
+function ${product}() {
+    local executable="/usr/local/bin/${product}"
+    [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
+    [[ "\$1" == "-h" ]] && cat << EOF2 && return 1
+Usage: ${product} path[:number]
+
+Open an arbitrary file, folder, or project for editing in ${product}.
+EOF2
+    [[ \$# -lt 1 ]] && \${executable} . || \${executable} "\$@"
 }
+EOF1
+)"
+        eval "$(cat<<EOF1
+function ${product}-diff() {
+    local executable="/usr/local/bin/${product}"
+    [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
+    [[ \$# -ne 2 ]] && cat << EOF2 && return 1
+Usage: ${product}-diff path1 path2
 
-function idea-diff() {
-    local idea_bin_path="/usr/local/bin/idea"
-    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
-    [[ $# -ne 2 ]] && cat << EOF && return 1
-Usage: idea-diff path1 path2
-
-Viewing differences between files in IntelliJ IDEA.
-For more information, please visit https://www.jetbrains.com/help/idea/command-line-differences-viewer.html.
-EOF
-    $idea_bin_path diff "$@"
+Viewing differences between files in ${product}.
+EOF2
+    \${executable} diff "\$@"
 }
+EOF1
+)"
+        eval "$(cat<<EOF1
+function ${product}-merge() {
+    local executable="/usr/local/bin/${product}"
+    [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
+    [[ \$# -ne 3 ]] && [[ \$# -ne 4 ]] && cat << EOF2 && return 1
+Usage: ${product}-merge path1 path2 [path3] output
 
-function idea-merge() {
-    local idea_bin_path="/usr/local/bin/idea"
-    [[ ! -e "$idea_bin_path" ]] && (>&2 echo "idea CLI is not found in [$idea_bin_path].") && return 1
-    [[ $# -ne 3 ]] && [[ $# -ne 4 ]] && cat << EOF && return 1
-Usage: idea-merge path1 path2 [path3] output
-
-Merge files in IntelliJ IDEA.
-For more information, please visit https://www.jetbrains.com/help/idea/command-line-merge-tool.html.
-EOF
-    $idea_bin_path merge "$@"
+Merge files in ${product}.
+EOF2
+    \${executable} merge "\$@"
 }
-
-function webstorm() {
-    (>&2 echo "Operation not supported.") && return 1
+EOF1
+)"
+    done
 }
-
-function webstorm-diff() {
-    (>&2 echo "Operation not supported.") && return 1
-}
-
-function webstorm-merge() {
-    (>&2 echo "Operation not supported.") && return 1
-}
+__generate_jetbrains_cli
 
 function nvm() {
     (>&2 echo "Operation not supported.") && return 1
