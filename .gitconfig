@@ -50,3 +50,6 @@
 
 [tag]
   sort = version:refname
+
+[rerere]
+  enabled = 1
