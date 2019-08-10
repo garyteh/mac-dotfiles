@@ -82,6 +82,18 @@ EOF
     code $(sed "${1}q;d" $tmpFolder)
 }
 
+function code() {
+    local filepath binfile=$(which code)
+
+    if [[ $# -eq 1 ]]; then
+        filepath=$(find "$__P_PROJECT_PATH" -maxdepth ${__P_MAX_DEPTH:-1} -type d ! -path "$__P_PROJECT_PATH" -name "$@")
+        if [[ -e "${filepath}" ]]; then
+            ${binfile} "${filepath}" && return 0
+        fi
+    fi
+    ${binfile} "$@"
+}
+
 function __generate_jetbrains_cli() {
     local product binfile
 
