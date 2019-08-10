@@ -13,7 +13,7 @@
   ci = commit
   st = status
   sb = show-branch
-  up = !_git_fetch_and_merge
+  up = !_git_fetch_and_rebase
   l = "!git --no-pager lg -10; echo"
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
   who = log --format="'%ai %h %aN %s'"
