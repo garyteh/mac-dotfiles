@@ -33,14 +33,14 @@ EOF
     return 1
 }
 
-function _p() {
+function __list_directory_in_p_project_path() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && return 1
     local curr potentials 
     curr="${COMP_WORDS[COMP_CWORD]}"
     potentials=$(find "$__P_PROJECT_PATH" -maxdepth ${__P_MAX_DEPTH:-1} -type d ! -path "$__P_PROJECT_PATH" -printf "%f\n")
     COMPREPLY=( $(compgen -W "${potentials}" -- ${curr}) )
 }
-complete -F _p p
+complete -F __list_directory_in_p_project_path p
 
 function f() {
     [[ $# -ne 1 ]] && cat << EOF && return 1
