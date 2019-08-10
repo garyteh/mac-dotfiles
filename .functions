@@ -9,7 +9,7 @@ Navigate to your project quickly.
 EOF
     local path paths numberOfProjects searchTerm
     searchTerm="$1"
-    paths=$(find $__P_PROJECT_PATH -maxdepth ${__P_MAX_DEPTH:-1} -type d -name $searchTerm)
+    paths=$(find "$__P_PROJECT_PATH" -maxdepth ${__P_MAX_DEPTH:-1} -type d -name $searchTerm ! -path "$__P_PROJECT_PATH")
 
     if [[ ! -z "${paths}" ]]; then
         numberOfProjects=$(wc -l <<< "$paths")
@@ -37,7 +37,7 @@ function _p() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && return 1
     local curr potentials 
     curr="${COMP_WORDS[COMP_CWORD]}"
-    potentials=$(find $__P_PROJECT_PATH -maxdepth ${__P_MAX_DEPTH:-1} -type d | grep -o -E "[^/]*$")
+    potentials=$(find "$__P_PROJECT_PATH" -maxdepth ${__P_MAX_DEPTH:-1} -type d ! -path "$__P_PROJECT_PATH" -printf "%f\n")
     COMPREPLY=( $(compgen -W "${potentials}" -- ${curr}) )
 }
 complete -F _p p
