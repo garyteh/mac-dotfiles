@@ -83,12 +83,14 @@ EOF
 }
 
 function __generate_jetbrains_cli() {
-    local product
+    local product binfile
 
-    for product in {idea,webstorm,charm}; do
-        eval "$(cat<<EOF1
+    for product in {idea,webstorm,charm,appcode}; do
+        binfile=$(which "$product")
+        if [[ ! -z "${binfile+x}" ]]; then
+            eval "$(cat<<EOF1
 function ${product}() {
-    local executable="/usr/local/bin/${product}"
+    local executable="${binfile}"
     [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
     [[ "\$1" == "-h" ]] && cat << EOF2 && return 1
 Usage: ${product} path[:number]
@@ -99,9 +101,9 @@ EOF2
 }
 EOF1
 )"
-        eval "$(cat<<EOF1
+            eval "$(cat<<EOF1
 function ${product}-diff() {
-    local executable="/usr/local/bin/${product}"
+    local executable="${binfile}"
     [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
     [[ \$# -ne 2 ]] && cat << EOF2 && return 1
 Usage: ${product}-diff path1 path2
@@ -112,9 +114,9 @@ EOF2
 }
 EOF1
 )"
-        eval "$(cat<<EOF1
+            eval "$(cat<<EOF1
 function ${product}-merge() {
-    local executable="/usr/local/bin/${product}"
+    local executable="${binfile}"
     [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
     [[ \$# -ne 3 ]] && [[ \$# -ne 4 ]] && cat << EOF2 && return 1
 Usage: ${product}-merge path1 path2 [path3] output
@@ -125,6 +127,7 @@ EOF2
 }
 EOF1
 )"
+        fi
     done
 }
 __generate_jetbrains_cli
