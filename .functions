@@ -86,8 +86,8 @@ function __generate_wrapper() {
     local product binfile
 
     for product in code subl; do
-        binfile=$(which "${product}")
-        if [[ ! -z "${binfile+x}" ]]; then
+        binfile=$(which "${product}" 2> /dev/null)
+        if [[ ! -z "${binfile}" ]]; then
             eval "$(cat<<EOF
 function ${product}() {
     local filepath executable="${binfile}"
@@ -112,8 +112,8 @@ function __generate_jetbrains_cli() {
     local product binfile
 
     for product in idea webstorm charm appcode; do
-        binfile=$(which "$product")
-        if [[ ! -z "${binfile+x}" ]]; then
+        binfile=$(which "$product" 2> /dev/null)
+        if [[ ! -z "${binfile}" ]]; then
             eval "$(cat<<EOF1
 function ${product}() {
     local executable="${binfile}" filepath help
