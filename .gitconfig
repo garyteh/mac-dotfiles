@@ -6,7 +6,7 @@
 
 [user]
   name = Gary Teh
-  email = changsiongteh@gmail.com
+  email = gaaryteh@gmail.com
 
 [alias]
   co = checkout
@@ -54,3 +54,12 @@
 [rerere]
   enabled = true
   autoupdate = true
+
+[credential]
+  helper = osxkeychain
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+  
+[url "git@bitbucket.org:"]
+  insteadOf = https://bitbucket.org/
