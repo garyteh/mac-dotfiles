@@ -4,3 +4,7 @@
 [[ -s $(brew --prefix)/etc/bash_completion.d/git-prompt.sh ]] && source $(brew --prefix)/etc/bash_completion.d/git-prompt.sh
 
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+eval "$(thefuck --alias)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+eval "$(jenv init -)"
