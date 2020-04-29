@@ -22,3 +22,5 @@ alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && 
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 alias pbcopy-="head -c -1 | pbcopy"
 alias git=hub
+alias docker-local="unset DOCKER_HOST DOCKER_TLS_VERIFY"
+alias docker-matrix="export DOCKER_HOST=tcp://the-matrix.local:2376 DOCKER_TLS_VERIFY=1"
