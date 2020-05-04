@@ -238,3 +238,19 @@ function decode-base64() {
         echo "Decoded value [$(pbpaste)] copied to the clipboard."
     fi
 }
+
+function mvn() {
+    if [[ -e "./mvnw" ]]; then
+        "./mvnw" "$@"
+    else
+        command mvn "$@"
+    fi
+}
+
+function gradle() {
+    if [[ -e "./gradlew" ]]; then
+        "./gradlew" "$@"
+    else
+        command gradle "$@"
+    fi
+}
