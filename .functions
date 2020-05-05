@@ -198,6 +198,12 @@ function rbenv() {
     rbenv "$@"
 }
 
+function perl() {
+    unset -f perl
+    eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
+    perl "$@"
+}
+
 function top-cpu() {
     [[ "$1" == "-h" ]] && cat << EOF && return 1
 Usage: top-cpu [-h] [-t threshold]

@@ -3,7 +3,6 @@
 [[ -s "$__BREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ]] && source "$__BREW_PREFIX/etc/bash_completion.d/git-prompt.sh"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
 eval "$(thefuck --alias)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
