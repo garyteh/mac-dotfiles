@@ -176,32 +176,32 @@ __generate_jetbrains_cli
 function nvm() {
     unset -f nvm
     source $(brew --prefix nvm)/nvm.sh
-    nvm "$@"
+    command nvm "$@"
 }
 
 function node() {
     unset -f node
     source $(brew --prefix nvm)/nvm.sh
-    node "$@"
+    command node "$@"
 }
 
 function npm() {
     unset -f npm
     source $(brew --prefix nvm)/nvm.sh
     source <(npm completion)
-    npm "$@"
+    command npm "$@"
 }
 
 function rbenv() {
     unset -f rbenv
     eval "$(rbenv init -)"
-    rbenv "$@"
+    command rbenv "$@"
 }
 
 function perl() {
     unset -f perl
     eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
-    perl "$@"
+    command perl "$@"
 }
 
 function top-cpu() {
