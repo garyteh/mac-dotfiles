@@ -198,12 +198,6 @@ function rbenv() {
     rbenv "$@"
 }
 
-function jenv() {
-    unset -f jenv
-    eval "$(jenv init -)"
-    jenv "$@"
-}
-
 function top-cpu() {
     [[ "$1" == "-h" ]] && cat << EOF && return 1
 Usage: top-cpu [-h] [-t threshold]
