@@ -10,6 +10,7 @@ export __P_POST_CMD="(git config --get remote.origin.url && (git pull --all -q |
 export GOPATH="$HOME/.go"
 export GOROOT="/usr/local/opt/go/libexec"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export __BREW_PREFIX=$(brew --prefix)
 
 PKG_CONFIG_PATH="/usr/local/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
