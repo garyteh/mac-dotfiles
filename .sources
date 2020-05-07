@@ -1,6 +1,4 @@
 [[ -f "$__BREW_PREFIX/etc/bash_completion" ]] && source "$__BREW_PREFIX/etc/bash_completion"
-[[ -s "$__BREW_PREFIX/etc/bash_completion.d/git-completion.bash" ]] && source "$__BREW_PREFIX/etc/bash_completion.d/git-completion.bash"
-[[ -s "$__BREW_PREFIX/etc/bash_completion.d/git-prompt.sh" ]] && source "$__BREW_PREFIX/etc/bash_completion.d/git-prompt.sh"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 eval "$(thefuck --alias)"
