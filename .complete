@@ -1,1 +1,12 @@
 __git_complete git-d __git_main
+
+[[ -e "$HOME/.ssh/config" ]] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh
+
+function __list_directory_in_p_project_path() {
+    [[ -z ${__P_PROJECT_PATH+x} ]] && return 1
+    local curr potentials 
+    curr="${COMP_WORDS[COMP_CWORD]}"
+    potentials=$(find "$__P_PROJECT_PATH" -maxdepth ${__P_MAX_DEPTH:-1} -type d ! -path "$__P_PROJECT_PATH" -printf "%f\n")
+    COMPREPLY=( $(compgen -W "${potentials}" -- ${curr}) )
+}
+complete -F __list_directory_in_p_project_path p
