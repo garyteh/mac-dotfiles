@@ -10,3 +10,15 @@ function __list_directory_in_p_project_path() {
     COMPREPLY=( $(compgen -W "${potentials}" -- ${curr}) )
 }
 complete -F __list_directory_in_p_project_path p
+
+function __autocomplete_jetbrains_cli() {
+    local product binfile
+
+    for product in idea webstorm charm appcode; do
+        binfile=$(which "$product" 2> /dev/null)
+        if [[ ! -z "${binfile}" ]]; then
+			complete -F __list_directory_in_p_project_path ${product}
+        fi
+    done
+}
+__autocomplete_jetbrains_cli
