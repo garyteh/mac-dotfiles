@@ -5,3 +5,67 @@ eval "$(thefuck --alias)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 eval "$(jenv init -)"
+
+function __generate_jetbrains_cli() {
+    local product binfile
+
+    for product in idea webstorm charm appcode; do
+        binfile=$(which "$product" 2> /dev/null)
+        if [[ ! -z "${binfile}" ]]; then
+            eval "$(cat<<EOF1
+function ${product}() {
+    local executable="${binfile}" filepath help
+    help=\$(cat << EOF2
+Usage: ${product} path[:number]
+
+Open an arbitrary file, folder, or project for editing in ${product}.
+EOF2
+)
+    [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && (>&2 echo "\${help}") && return 1
+    [[ \$# -gt 1 ]] && (>&2 echo "Invalid argument [\$@].") && (>&2 echo "\${help}") && return 1
+    [[ "\$1" == "-h" ]] && echo "\${help}" && return 0
+    if [[ \$# -eq 0 ]]; then
+        \${executable} .
+    elif [[ -e "\$@" ]]; then
+        \${executable} "\$@"
+    else
+        filepath=\$(find "\$__P_PROJECT_PATH" -maxdepth \${__P_MAX_DEPTH:-1} -type d ! -path "\$__P_PROJECT_PATH" -name "\$@")
+        if [[ -e "\${filepath}" ]]; then
+            \${executable} "\${filepath}"
+        else
+            (>&2 echo "Invalid argument [\$@].") && return 1
+        fi
+    fi
+}
+EOF1
+)"
+            eval "$(cat<<EOF1
+function ${product}-diff() {
+    local executable="${binfile}"
+    [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
+    [[ \$# -ne 2 ]] && cat << EOF2 && return 1
+Usage: ${product}-diff path1 path2
+
+Viewing differences between files in ${product}.
+EOF2
+    \${executable} diff "\$@"
+}
+EOF1
+)"
+            eval "$(cat<<EOF1
+function ${product}-merge() {
+    local executable="${binfile}"
+    [[ ! -e "\${executable}" ]] && (>&2 echo "${product} CLI is not found in [\${executable}].") && return 1
+    [[ \$# -ne 3 ]] && [[ \$# -ne 4 ]] && cat << EOF2 && return 1
+Usage: ${product}-merge path1 path2 [path3] output
+
+Merge files in ${product}.
+EOF2
+    \${executable} merge "\$@"
+}
+EOF1
+)"
+        fi
+    done
+}
+__generate_jetbrains_cli
