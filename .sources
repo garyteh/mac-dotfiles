@@ -9,7 +9,7 @@ eval "$(jenv init -)"
 function __generate_jetbrains_cli() {
     local product binfile
 
-    for product in idea webstorm charm appcode; do
+    for product in idea webstorm charm appcode goland; do
         binfile=$(which "$product" 2> /dev/null)
         if [[ ! -z "${binfile}" ]]; then
             eval "$(cat<<EOF1
