@@ -29,7 +29,7 @@ EOF2
     elif [[ -e "\$@" ]]; then
         \${executable} "\$@"
     else
-        filepath=\$(find "\$__P_PROJECT_PATH" -maxdepth \${__P_MAX_DEPTH:-1} -type d ! -path "\$__P_PROJECT_PATH" -name "\$@")
+        filepath=\$(find \$__P_PROJECT_PATH -mindepth 1 -maxdepth \${__P_MAX_DEPTH:-1} -type d -name "\$@")
         if [[ -e "\${filepath}" ]]; then
             \${executable} "\${filepath}"
         else

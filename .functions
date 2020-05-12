@@ -7,7 +7,7 @@ Navigate to your project quickly.
 EOF
     local path paths numberOfProjects searchTerm
     searchTerm="$1"
-    paths=$(find "$__P_PROJECT_PATH" -maxdepth ${__P_MAX_DEPTH:-1} -type d -name $searchTerm ! -path "$__P_PROJECT_PATH")
+    paths=$(find $__P_PROJECT_PATH -mindepth 1 -maxdepth ${__P_MAX_DEPTH:-1} -type d -name $searchTerm)
 
     if [[ ! -z "${paths}" ]]; then
         numberOfProjects=$(wc -l <<< "$paths")
