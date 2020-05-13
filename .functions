@@ -74,7 +74,7 @@ EOF
 function nvm() {
     unset -f nvm
     source $(brew --prefix nvm)/nvm.sh
-    command nvm "$@"
+    nvm "$@"
 }
 
 function node() {
@@ -93,7 +93,7 @@ function npm() {
 function rbenv() {
     unset -f rbenv
     eval "$(rbenv init -)"
-    command rbenv "$@"
+    rbenv "$@"
 }
 
 function perl() {
