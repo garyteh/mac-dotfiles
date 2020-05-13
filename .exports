@@ -63,6 +63,8 @@ CPPFLAGS="-I/usr/local/opt/zlib/include $CPPFLAGS"
 CPPFLAGS=$(echo -n $CPPFLAGS | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
 export CPPFLAGS
 
+MANPATH="/usr/share/man:$MANPATH"
+MANPATH="/usr/local/share/man:$MANPATH"
 MANPATH="/usr/local/opt/ack/share/man:$MANPATH"
 MANPATH="/usr/local/opt/augeas/share/man:$MANPATH"
 MANPATH="/usr/local/opt/autoconf/share/man:$MANPATH"
@@ -186,7 +188,5 @@ MANPATH="/usr/local/opt/wget/share/man:$MANPATH"
 MANPATH="/usr/local/opt/xmlstarlet/share/man:$MANPATH"
 MANPATH="/usr/local/opt/xz/share/man:$MANPATH"
 MANPATH="/usr/local/opt/zlib/share/man:$MANPATH"
-MANPATH="/usr/local/share/man:$MANPATH"
-MANPATH="/usr/share/man:$MANPATH"
 MANPATH=$(echo -n $MANPATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
 export MANPATH
