@@ -921,7 +921,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>743 451 918 512 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>3200 720 1870 1057 3200 720 1920 1057 </string>
+	<string>0 0 3200 1777 0 0 3200 1777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 935 585 467 0 0 3200 1777 </string>
 	<key>New Bookmarks</key>
@@ -1587,7 +1587,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SpaceMonoForPowerline-Regular 11</string>
+			<string>Monaco 11</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1677,7 +1677,7 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
-			<false/>
+			<true/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -1703,19 +1703,26 @@
 		<string>3.3.0</string>
 		<string>3.3.7</string>
 	</array>
+	<key>NoSyncBFPRecents</key>
+	<array>
+		<string>Menlo</string>
+		<string>Monaco</string>
+		<string>DejaVu Sans Mono for Powerline</string>
+		<string>Hack</string>
+	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{3200, 720}, {1920, 1080}}</string>
+		<string>{{0, 0}, {3200, 1800}}</string>
 		<key>topLeft</key>
-		<string>{3355, 1643}</string>
+		<string>{1938, 1519}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>5DD55D61-0718-45EE-A048-AEFBBB3E0257</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>100</integer>
+	<integer>101</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>586656565.23291099</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
