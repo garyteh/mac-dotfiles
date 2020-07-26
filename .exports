@@ -11,8 +11,6 @@ export GOPATH="$HOME/.go"
 export GOROOT="/usr/local/opt/go/libexec"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export __BREW_PREFIX=$(brew --prefix)
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 PKG_CONFIG_PATH="/usr/local/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 PKG_CONFIG_PATH="/usr/local/opt/icu4c/lib/pkgconfig:$PKG_CONFIG_PATH"
