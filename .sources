@@ -1,5 +1,7 @@
 [[ -f "$__BREW_PREFIX/etc/bash_completion" ]] && source "$__BREW_PREFIX/etc/bash_completion"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[[ -f "/usr/local/opt/fzf/shell/completion.bash" ]] && source "/usr/local/opt/fzf/shell/completion.bash"
+[[ -f "/usr/local/opt/fzf/shell/key-bindings.bash" ]] && source "/usr/local/opt/fzf/shell/key-bindings.bash"
 
 eval "$(thefuck --alias)"
 eval "$(pyenv init -)"
