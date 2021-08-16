@@ -25,6 +25,7 @@
   bpr = browse -- pulls
   spurs = !_git_stash_and_pull
   url = config --get remote.origin.url
+  sizes = !_git_show_all_blob_sizes
 
 [apply]
   whitespace = nowarn
