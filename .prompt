@@ -1,4 +1,8 @@
 function _update_ps1() {
-    PS1="$($GOPATH/bin/powerline-go -modules time,venv,user,cwd,git -max-width 50 -theme ~/.config/powerline-go/tomorrow-night.json)"
+    PS1="$($GOPATH/bin/powerline-go \
+        -modules time,venv,user,cwd,git \
+        -priority time,cwd,venv,user,git \
+        -max-width 30 \
+        -theme ~/.config/powerline-go/tomorrow-night.json)"
 }
 PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
