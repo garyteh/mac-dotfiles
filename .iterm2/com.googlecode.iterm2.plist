@@ -1554,6 +1554,8 @@
 					<string></string>
 				</dict>
 			</dict>
+			<key>Left Option Key Changeable</key>
+			<false/>
 			<key>Link Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -1679,6 +1681,8 @@
 	</array>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PasteTabToStringTabStopSize</key>
 	<integer>4</integer>
 	<key>PointerActions</key>
@@ -1714,6 +1718,8 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>SoundForEsc</key>
