@@ -24,3 +24,4 @@ alias pbcopy-="head -c -1 | pbcopy"
 alias docker-local="unset DOCKER_HOST DOCKER_TLS_VERIFY"
 alias docker-matrix="export DOCKER_HOST=tcp://the-matrix.local:2376 DOCKER_TLS_VERIFY=1"
 alias git-d='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias pyenv='AR=/usr/bin/ar pyenv'

@@ -107,9 +107,6 @@ function pyenv() {
     eval "$(pyenv init -)"
     eval "$(pyenv init --path)"
     eval "$(pyenv virtualenv-init -)"
-    eval 'function pyenv() {
-    AR="/usr/bin/ar" /usr/local/bin/pyenv "$@"
-}'
     pyenv "$@"
 }
 
