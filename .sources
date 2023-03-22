@@ -3,12 +3,6 @@
 [[ -f "/usr/local/opt/fzf/shell/completion.bash" ]] && source "/usr/local/opt/fzf/shell/completion.bash"
 [[ -f "/usr/local/opt/fzf/shell/key-bindings.bash" ]] && source "/usr/local/opt/fzf/shell/key-bindings.bash"
 
-eval "$(thefuck --alias)"
-eval "$(pyenv init -)"
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-eval "$(jenv init -)"
-
 function __generate_jetbrains_cli() {
     local product binfile
 

@@ -72,22 +72,22 @@ EOF
 }
 
 function nvm() {
-    unset -f nvm
+    unset -f nvm node npm
     source $(brew --prefix nvm)/nvm.sh
     nvm "$@"
 }
 
 function node() {
-    unset -f node
+    unset -f nvm node npm
     source $(brew --prefix nvm)/nvm.sh
-    command node "$@"
+    node "$@"
 }
 
 function npm() {
-    unset -f npm
+    unset -f nvm node npm
     source $(brew --prefix nvm)/nvm.sh
     source <(npm completion)
-    command npm "$@"
+    npm "$@"
 }
 
 function rbenv() {
@@ -99,7 +99,36 @@ function rbenv() {
 function perl() {
     unset -f perl
     eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib=$HOME/perl5)"
-    command perl "$@"
+    perl "$@"
+}
+
+function pyenv() {
+    unset -f pyenv
+    eval "$(pyenv init -)"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv virtualenv-init -)"
+    eval 'function pyenv() {
+    AR="/usr/bin/ar" /usr/local/bin/pyenv "$@"
+}'
+    pyenv "$@"
+}
+
+function fuck() {
+    unset -f fuck thefuck
+    eval "$(thefuck --alias)"
+    fuck "$@"
+}
+
+function thefuck() {
+    unset -f fuck thefuck
+    eval "$(thefuck --alias)"
+    thefuck "$@"
+}
+
+function jenv() {
+    unset -f jenv
+    eval "$(jenv init -)"
+    jenv "$@"
 }
 
 function top-cpu() {
@@ -141,7 +170,7 @@ function mvn() {
     if [[ -e "./mvnw" ]]; then
         "./mvnw" "$@"
     else
-        command mvn "$@"
+        mvn "$@"
     fi
 }
 
@@ -149,6 +178,6 @@ function gradle() {
     if [[ -e "./gradlew" ]]; then
         "./gradlew" "$@"
     else
-        command gradle "$@"
+        gradle "$@"
     fi
 }
