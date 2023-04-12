@@ -129,6 +129,21 @@ function jenv() {
     jenv "$@"
 }
 
+function docker() {
+    unset -f docker
+    if ! docker stats --no-stream &> /dev/null; then
+        open -a Docker
+        echo -n "Starting docker daemon"
+        until docker stats --no-stream &> /dev/null
+        do
+            echo -n '.'
+            sleep 2
+        done
+        echo
+    fi
+    docker "$@"
+}
+
 function top-cpu() {
     [[ "$1" == "-h" ]] && cat << EOF && return 1
 Usage: top-cpu [-h] [-t threshold]
