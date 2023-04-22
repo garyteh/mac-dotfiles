@@ -1,0 +1,17 @@
+CPPFLAGS="-I/usr/local/opt/binutils/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/bzip2/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/curl/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/icu4c/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/libffi/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/mysql@5.6/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/ncurses/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/openjdk/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/openssl@1.1/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/openssl@1.1/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/postgresql@9.5/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/readline/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/ruby/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/sqlite/include $CPPFLAGS"
+CPPFLAGS="-I/usr/local/opt/zlib/include $CPPFLAGS"
+CPPFLAGS=$(echo -n $CPPFLAGS | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
+export CPPFLAGS
