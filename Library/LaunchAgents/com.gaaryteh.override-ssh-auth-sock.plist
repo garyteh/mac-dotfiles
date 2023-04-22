@@ -8,7 +8,7 @@
   <array>
     <string>/bin/sh</string>
     <string>-c</string>
-    <string>/usr/local/opt/coreutils/libexec/gnubin/ln -sf $HOME/.gnupg/S.gpg-agent.ssh $SSH_AUTH_SOCK</string>
+    <string>ln -sf $HOME/.gnupg/S.gpg-agent.ssh $SSH_AUTH_SOCK</string>
   </array>
   <key>RunAtLoad</key>
   <true/>

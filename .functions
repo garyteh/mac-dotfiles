@@ -1,3 +1,47 @@
+if [[ -t 1 ]]; then
+    function tty_escape() { 
+        printf "\033[%sm" "$1"
+    }
+else
+    function tty_escape() {
+        :
+    }
+fi
+
+function tty_mkbold() { 
+    tty_escape "1;$1"
+}
+
+function shell_join() {
+    local arg
+    printf "%s" "$1"
+    shift
+    for arg in "$@"; do
+        printf " "
+        printf "%s" "${arg// /\ }"
+    done
+}
+
+function chomp() {
+    printf "%s" "${1/"$'\n'"/}"
+}
+
+function error() {
+    tty_red="$(tty_mkbold 31)"
+    tty_reset="$(tty_escape 0)"
+
+    printf "%s\n" "$@" >&2
+    printf "${tty_red}Error${tty_reset}: %s\n" "$(shell_join "$@")" >&2
+    return 1
+}
+
+function warn() {
+    tty_yellow="$(tty_mkbold 33)"
+    tty_reset="$(tty_escape 0)"
+
+    printf "${tty_yellow}Warning${tty_reset}: %s\n" "$(chomp "$1")" >&2
+}
+
 function p() {
     [[ -z ${__P_PROJECT_PATH+x} ]] && echo '__P_PROJECT_PATH not found.' && return 1
     [[ $# -ne 1 ]] && cat << EOF && return 1
@@ -73,20 +117,46 @@ EOF
 
 function nvm() {
     unset -f nvm node npm
-    source $(brew --prefix nvm)/nvm.sh
+    if [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]]; then
+        source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+    else
+        error "Unable to initialise nvm. nvm.sh not found."
+    fi
+    if [[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ]]; then
+        source "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+    else 
+        warn "Unable to initialise nvm bash completion."
+    fi
     nvm "$@"
 }
 
 function node() {
     unset -f nvm node npm
-    source $(brew --prefix nvm)/nvm.sh
+    if [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]]; then
+        source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+    else
+        error "Unable to initialise nvm. nvm.sh not found."
+    fi
+    if [[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ]]; then
+        source "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+    else 
+        warn "Unable to initialise nvm bash completion."
+    fi
     node "$@"
 }
 
 function npm() {
     unset -f nvm node npm
-    source $(brew --prefix nvm)/nvm.sh
-    source <(npm completion)
+    if [[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ]]; then
+        source "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"
+    else
+        error "Unable to initialise nvm. nvm.sh not found."
+    fi
+    if [[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ]]; then
+        source "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+    else 
+        warn "Unable to initialise nvm bash completion."
+    fi
     npm "$@"
 }
 
@@ -142,6 +212,12 @@ function docker() {
         echo
     fi
     docker "$@"
+}
+
+function pyenv-virtualenv-init() {
+    unset -f pyenv-virtualenv-init
+    eval "$(pyenv virtualenv-init -)"
+    pyenv-virtualenv-init "$@"
 }
 
 function top-cpu() {
