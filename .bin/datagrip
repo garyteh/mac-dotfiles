@@ -4,7 +4,7 @@ set -euo pipefail
 
 app_name="DataGrip.app"
 if [[ $# -eq 0 ]]; then
-  open -na "${app_name}" .
+  open -na "${app_name}" --args "."
 elif [[ $# -gt 0 ]]; then
   case $1 in
   -h | --help)
