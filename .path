@@ -16,6 +16,7 @@ PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/libtool/libexec/gnubin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
 PATH="$HOME/Library/Python/3.7/bin:$PATH"
+PATH="$HOME/.lmstudio/bin:$PATH"
 PATH="$HOME/.jenv/bin:$PATH"
 PATH="$HOME/.bin:$PATH"
 PATH=$(echo -n $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
