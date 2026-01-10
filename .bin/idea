@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+app_name="IntelliJ IDEA.app"
+if [[ $# -eq 0 ]]; then
+  open -na "${app_name}" --args "."
+elif [[ $# -gt 0 ]]; then
+  case $1 in
+  -h | --help)
+    name=$(basename $0)
+    cat <<EOF && exit 0
+Usage: $name [COMMAND] [<path>]
+
+Opens IntelliJ IDEA from shell. By default, it opens the current directory as project.
+
+Commands:
+  diff <path1> <path2> [<path3>]              Open the diff viewer to see differences between two specified files.
+  merge <path1> <path2> [<base>] <output>     Open the Merge dialog to merge the specified files.
+  format                                      Apply code style formatting to the specified files.
+  inspect                                     Perform code inspection on the specified project.
+For more information, see https://www.jetbrains.com/help/idea/working-with-the-ide-features-from-command-line.html#arguments
+EOF
+    ;;
+  :)
+    open -na "${app_name}" --args "$@"
+    ;;
+  esac
+fi
