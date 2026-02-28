@@ -1,23 +1,23 @@
-PATH="/bin:$PATH"
-PATH="/sbin:$PATH"
-PATH="/usr/bin:$PATH"
-PATH="/usr/sbin:$PATH"
-PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/sbin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/gnu-indent/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/gnu-time/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/libtool/libexec/gnubin:$PATH"
-PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
-PATH="$HOME/Library/Python/3.7/bin:$PATH"
-PATH="$HOME/.lmstudio/bin:$PATH"
-PATH="$HOME/.jenv/bin:$PATH"
-PATH="$HOME/.bin:$PATH"
-PATH=$(echo -n $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')
+path_append() {
+  local dir="$1"
+  [[ -n "$dir" && -d "$dir" ]] || return 0
+  case ":$PATH:" in
+    *":$dir:"*) return 0 ;;
+    *) PATH="$PATH:$dir" ;;
+  esac
+}
+
+path_append "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/gnu-indent/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/gnu-time/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/libtool/libexec/gnubin"
+path_append "$HOMEBREW_PREFIX/opt/make/libexec/gnubin"
+path_append "$HOME/.jenv/bin"
+path_append "$HOME/.bin"
 export PATH
