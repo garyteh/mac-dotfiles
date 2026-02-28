@@ -270,3 +270,34 @@ function gradle() {
         gradle "$@"
     fi
 }
+
+function open-dotfiles() {
+  local editor="${1:-subl}"
+
+  case "$editor" in
+    subl|code|cursor|open) ;;
+    *) 
+        error "dot_open_sources: editor not allowed: $editor" 
+        return 2
+        ;;
+  esac
+
+  local -a files=()
+  local f
+  for f in ~/.{evals,exports,path,manpaths,pcpaths,lflags,cflags,sources,functions,aliases,complete,prompt,extra}; do
+    [[ -e "$f" ]] && files+=("$f")
+  done
+
+  if ((${#files[@]} == 0)); then
+    error "dot_open_sources: no matching files found"
+    return 1
+  fi
+
+  # If editor exists on PATH, use it
+  if command -v "$editor" >/dev/null 2>&1; then
+    "$editor" "${files[@]}"
+  else
+    warn "$(printf "dot_open_sources: '%s' not found; falling back to TextEdit" "$editor")"
+    open -a "TextEdit" "${files[@]}"
+  fi
+}
