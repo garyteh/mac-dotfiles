@@ -1,23 +1,27 @@
-path_append() {
+path_prepend() {
   local dir="$1"
   [[ -n "$dir" && -d "$dir" ]] || return 0
   case ":$PATH:" in
     *":$dir:"*) return 0 ;;
-    *) PATH="$PATH:$dir" ;;
+    *) PATH="$dir:$PATH" ;;
   esac
 }
 
-path_append "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/gnu-indent/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/gnu-time/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/libtool/libexec/gnubin"
-path_append "$HOMEBREW_PREFIX/opt/make/libexec/gnubin"
-path_append "$HOME/.jenv/bin"
-path_append "$HOME/.bin"
+# 1) Put Homebrew GNU overrides FIRST (so they beat /usr/bin)
+path_prepend "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/gnu-indent/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/gnu-time/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/gnu-which/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/grep/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/libtool/libexec/gnubin"
+path_prepend "$HOMEBREW_PREFIX/opt/make/libexec/gnubin"
+
+# 2) Then your own bins early too (optional, but usually desired)
+path_prepend "$HOME/.bin"
+path_prepend "$HOME/.jenv/bin"
+
 export PATH
