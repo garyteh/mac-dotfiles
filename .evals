@@ -7,4 +7,6 @@ else
     export HOMEBREW_PREFIX="/usr/local"
 fi
 eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
-eval "$(zoxide init bash)"
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init bash --cmd cd --hook prompt)"
+fi

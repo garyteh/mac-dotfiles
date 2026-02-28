@@ -10,3 +10,17 @@ export GOPATH="$HOME/.go"
 export GOROOT="${HOMEBREW_PREFIX}/opt/go/libexec"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export GPG_TTY=$(tty)
+export _ZO_ECHO=1
+export _ZO_EXCLUDE_DIRS="$HOME/.cache:$HOME/.local/share:$HOME/Library/Caches:\
+.git:.hg:.svn:\
+.idea:.vscode:.fleet:\
+node_modules:\
+dist:build:out:target:\
+.gradle:.gradle:\
+.next:.nuxt:.angular:\
+coverage:\
+__pycache__:\
+.venv:venv:\
+.mypy_cache:.pytest_cache:\
+.DS_Store:\
+.tmp:tmp"
