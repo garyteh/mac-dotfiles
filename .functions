@@ -27,11 +27,15 @@ function chomp() {
 }
 
 function error() {
+    local tty_red tty_reset
     tty_red="$(tty_mkbold 31)"
     tty_reset="$(tty_escape 0)"
 
-    printf "%s\n" "$@" >&2
-    printf "${tty_red}Error${tty_reset}: %s\n" "$(shell_join "$@")" >&2
+    printf "%sError%s: %s\n" \
+        "$tty_red" \
+        "$tty_reset" \
+        "$(shell_join "$@")" >&2
+
     return 1
 }
 
