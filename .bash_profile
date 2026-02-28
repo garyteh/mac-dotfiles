@@ -1,12 +1,13 @@
 ##
-# Environment (export only)
+# Execute bash configurations
 # https://github.com/mathiasbynens/dotfiles
 ###
-for file in ~/.{exports,path,manpaths,pcpaths,lflags,cflags}; do
+for file in ~/.{exports,path,manpaths,pcpaths,lflags,cflags,evals,sources,functions,aliases,complete,prompt,extra}; do
   [[ -r "$file" ]] && source "$file"
 done
 
-# Load interactive config
-if [[ -r ~/.bashrc ]]; then
-  source ~/.bashrc
-fi
+shopt -s nocaseglob
+shopt -s histappend
+shopt -s cdspell
+shopt -s autocd
+shopt -s globstar
