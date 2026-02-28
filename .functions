@@ -224,6 +224,12 @@ function pyenv-virtualenv-init() {
     pyenv-virtualenv-init "$@"
 }
 
+function ngrok() {
+    unset -f ngrok
+    eval "$(ngrok completion)"
+    ngrok "$@"
+}
+
 function top-cpu() {
     [[ "$1" == "-h" ]] && cat << EOF && return 1
 Usage: top-cpu [-h] [-t threshold]
